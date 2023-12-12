@@ -226,3 +226,14 @@ def train(batch_size, num_epoch, dataset, data_colors, q_x, random_z=False):
             fig.savefig(f'backward_visualization.png')
             
     return model
+
+def visualize_output(model, data, dataset, q_x, s_color, random_z=False):
+    x_seq = p_sample_loop(model, dataset.shape, num_steps, betas, one_minus_alphas_bar_sqrt, q_x, random_z)
+    fig,ax = plt.subplots(1,2,figsize = (20,10))
+    ax[0].scatter(*data, edgecolor='white', c=s_color)
+    ax[0].set_title('Original Dataset')
+
+    cur_x = x_seq[100].detach()
+    ax[1].scatter(cur_x[:,0], cur_x[:,1], c=s_color, edgecolor='white');
+    ax[1].set_title('Diffusion Model Output')
+    fig.savefig(f'final output.png')
