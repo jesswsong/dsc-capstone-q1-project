@@ -1,0 +1,11 @@
+{
+    "data": {
+        "num_points": 10000,
+        "noise": 0.1
+    }, 
+    "forward": {
+        "num_steps": 100
+    },
+    "batch_size": 128,
+    "num_epoch": 1000
+}
