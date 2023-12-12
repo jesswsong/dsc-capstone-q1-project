@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.datasets import make_swiss_roll
 
-from source import create_dataset, forward_q_x, visualize_forward, train
+from source import create_dataset, forward_q_x, visualize_forward, train, visualize_output
 
 def main(targets):
     with open('config.json') as f:
@@ -25,9 +25,11 @@ def main(targets):
     if 'random' in targets:
         print('with random z')
         model = train(params['batch_size'], params['num_epoch'], dataset, s_color, q_x, random_z=True)
+        visualize_output(model, data, dataset, q_x, s_color, random_z=True)
     else:
         print('without random z')
         model = train(params['batch_size'], params['num_epoch'], dataset, s_color, q_x)
+        visualize_output(model, data, dataset, q_x, s_color)
 
 
 if __name__ == '__main__':
